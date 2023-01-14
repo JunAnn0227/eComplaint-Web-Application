@@ -30,7 +30,7 @@ include "reusable_components/user_session.php"
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Sent Form</h1>
+            <h1>Complaint Sent</h1>
         </div><!-- End Page Title -->
         <section class="container section">
             <div class="d-flex py-4 justify-content-center align-items-center text-center px-sm-5 px-0">
@@ -46,11 +46,11 @@ include "reusable_components/user_session.php"
 
             <div class="overflow-auto">
                 <table class='table table-hover table-responsive table-bordered'>
-                    <tr>
+                    <tr class='text-center'>
                         <th>Title</th></a>
-                        <th>Executive</th>
+                        <th>Executive Department</th>
                         <th>Status</th>
-                        <th>Last Updated</th>
+                        <th>Create Date</th>
                         <th>Action</th>
                     </tr>
                     <?php 
@@ -58,7 +58,7 @@ include "reusable_components/user_session.php"
                             include 'config/database.php';
 
                             try {
-                                $query = "SELECT * from complaint WHERE userID = :userID";
+                                $query = "SELECT * from complaint INNER JOIN department ON complaint.departmentID=department.department_ID WHERE userID = :userID";
                                 $stmt = $con->prepare($query);
                                 $stmt->bindParam(":userID", $_SESSION['user_id']);
                                 $stmt->execute();
@@ -69,10 +69,10 @@ include "reusable_components/user_session.php"
                                         extract($row);
                                         echo "<tr class='complain'>
                                                 <td>$title</td>
-                                                <td>$departmentID</td>
-                                                <td class='status'>$status</td>
-                                                <td>$modifydate</td>
-                                                <td><a href='complain_detail.php?complaintID=$complaintID'><i class='fa-solid fa-eye'></i></a></td>
+                                                <td>$department_name</td>
+                                                <td class='text-center'><span class='status badge'>$status</span></td>
+                                                <td class='text-center'>$createdate</td>
+                                                <td class='text-center'><a href='complain_detail.php?complaintID=$complaintID'><i class='fa-solid fa-eye'></i></a></td>
                                             </tr>";
                                     }
                                 }
@@ -88,7 +88,7 @@ include "reusable_components/user_session.php"
                             include 'config/database.php';
 
                             try {
-                                $query = "SELECT * from complaint";
+                                $query = "SELECT * from complaint INNER JOIN department ON complaint.departmentID=department.department_ID";
                                 $stmt = $con->prepare($query);
                                 $stmt->execute();
                                 $num = $stmt->rowCount();
@@ -98,10 +98,10 @@ include "reusable_components/user_session.php"
                                         extract($row);
                                         echo "<tr class='complain'>
                                                 <td>$title</td>
-                                                <td>$departmentID</td>
-                                                <td class='status'>$status</td>
-                                                <td>$modifydate</td>
-                                                <td><a href='complain_detail.php?complaintID=$complaintID'><i class='fa-solid fa-eye'></i></a></td>
+                                                <td>$department_name</td>
+                                                <td class='text-center'><span class='status badge'>$status</span></td>
+                                                <td class='text-center'>$createdate</td>
+                                                <td class='text-center'><a href='complain_detail.php?complaintID=$complaintID'><i class='fa-solid fa-eye'></i></a></td>
                                             </tr>";
                                     }
                                 }
@@ -121,6 +121,23 @@ include "reusable_components/user_session.php"
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
     <script src="js/main.js"></script>
+    <script>
+        for (var i = 0; i < document.getElementsByClassName("status").length; i++) {
+            if (document.getElementsByClassName("status")[i].innerHTML == "pending") {
+                document.getElementsByClassName("status")[i].innerHTML = "Pending";
+                document.getElementsByClassName("status")[i].classList.add("text-bg-warning");
+            } else if (document.getElementsByClassName("status")[i].innerHTML == "kiv") {
+                document.getElementsByClassName("status")[i].innerHTML = "Keep in View";
+                document.getElementsByClassName("status")[i].classList.add("text-bg-info");
+            } else if (document.getElementsByClassName("status")[i].innerHTML == "active") {
+                document.getElementsByClassName("status")[i].innerHTML = "Active";
+                document.getElementsByClassName("status")[i].classList.add("text-bg-success");
+            } else if (document.getElementsByClassName("status")[i].innerHTML == "closed") {
+                document.getElementsByClassName("status")[i].innerHTML = "Closed";
+                document.getElementsByClassName("status")[i].classList.add("text-bg-secondary");
+            }
+        }
+    </script>
     <script>
         function filter(fil_ter) {
             var complain_length=document.getElementsByClassName("complain").length;

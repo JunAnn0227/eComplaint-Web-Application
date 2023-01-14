@@ -115,7 +115,7 @@
                   </a>
                   <ul id='admin' class='nav-content collapse ' data-bs-parent='#sidebar-nav'>
                     <li>
-                      <a href='admin_user_form.php'>
+                      <a href='adminAddUser.php'>
                         <span>○ Add New</span>
                         <!-- bi bi-person-plus-fill -->
                       </a>

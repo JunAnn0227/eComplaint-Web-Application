@@ -79,7 +79,7 @@ include "reusable_components/user_session.php"
                         <th>Title</th></a>
                         <th>Department</th>
                         <th>Status</th>
-                        <th>Last Updated</th>
+                        <th>Create Date</th>
                         <th>Action</th>
                     </tr>
                     <?php
@@ -100,8 +100,8 @@ include "reusable_components/user_session.php"
                                                 <td class='text-center'>$complaintID</td>
                                                 <td>$title</td>
                                                 <td>$department_name</td>
-                                                <td class='status'>$status</td>
-                                                <td>$modifydate</td>
+                                                <td class='text-center'><span class='status badge'>$status</span></td>
+                                                <td class='text-center'>$createdate</td>
                                                 <td class='d-flex justify-content-center align-items-center'><a href='executive_complain_detail.php?complaintID=$complaintID'><i class='fa-regular fa-pen-to-square'></i><a/><span style='padding:5px'><span><a href='complain_detail.php?complaintID=$complaintID'><i class='fa-solid fa-eye '></i></a></td>
                                             </tr>";
                                 }
@@ -124,7 +124,23 @@ include "reusable_components/user_session.php"
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
     <script src="js/main.js"></script>
-
+    <script>
+        for (var i = 0; i < document.getElementsByClassName("status").length; i++) {
+            if (document.getElementsByClassName("status")[i].innerHTML == "pending") {
+                document.getElementsByClassName("status")[i].innerHTML = "Pending";
+                document.getElementsByClassName("status")[i].classList.add("text-bg-warning");
+            } else if (document.getElementsByClassName("status")[i].innerHTML == "kiv") {
+                document.getElementsByClassName("status")[i].innerHTML = "Keep in View";
+                document.getElementsByClassName("status")[i].classList.add("text-bg-info");
+            } else if (document.getElementsByClassName("status")[i].innerHTML == "active") {
+                document.getElementsByClassName("status")[i].innerHTML = "Active";
+                document.getElementsByClassName("status")[i].classList.add("text-bg-success");
+            } else if (document.getElementsByClassName("status")[i].innerHTML == "closed") {
+                document.getElementsByClassName("status")[i].innerHTML = "Closed";
+                document.getElementsByClassName("status")[i].classList.add("text-bg-secondary");
+            }
+        }
+    </script>
     <script>
         function filter(fil_ter) {
             var complain_length = document.getElementsByClassName("complain").length;
