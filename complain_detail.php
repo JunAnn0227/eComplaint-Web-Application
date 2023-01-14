@@ -22,8 +22,14 @@ $complain_id = $_GET["complaintID"];
     <?php include "nvgtop.php" ?>
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Complaint No: <?php echo "$complain_id"; ?></h1>
+            <h1>Complaint Details</h1>
         </div><!-- End Page Title -->
+        <div class="card">
+                <div class="card-header">
+                Complaint No: <?php echo "$complain_id"; ?>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
         <section class="container section">
             <!-- <div class="overflow-auto ">
                 <div class="d-flex align-items-center justify-content-center border-bottom border-2 pb-2">
@@ -136,6 +142,9 @@ $complain_id = $_GET["complaintID"];
                 </div>
             </form>
         </section>
+        </li>
+                </ul>
+            </div>
     </main>
 
     <script src="js/main.js"></script>

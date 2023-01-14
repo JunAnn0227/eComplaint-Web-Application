@@ -109,7 +109,7 @@ include "reusable_components/user_session.php"
                         $stmt_attachment->bindParam(':filename', $_FILES["complaint_image"]["name"]);
                         $stmt_attachment->bindParam(':type', $file_type);
 
-                        
+
                         if ($stmt_attachment->execute()) {
                             $query_attachmentid = "SELECT MAX(attachmentID) from attachment";
                             $stmt_attachmentid = $con->prepare($query_attachmentid);
@@ -169,31 +169,39 @@ include "reusable_components/user_session.php"
 
 
             <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST" enctype="multipart/form-data">
-                <div class="text-decoration-underline py-4">Add New:</div>
-                <div class="row">
-                    <div class="col-4 pb-3">Title</div>
-                    <div class="col-8 pb-3">
-                        <input type="text" name="title" class='form-control' value="<?php if (isset($_POST['title'])) {
-                                                                                        echo $_POST['title'];
-                                                                                    } else {
-                                                                                        echo "";
-                                                                                    } ?>">
+                <div class="card" style="padding:10px">
+                    <div class="card-header">
+                        Add New
                     </div>
-                    <div class="col-4 pb-3">Message</div>
-                    <div class="col-8 pb-3">
-                        <textarea rows="5" cols="33" name='message' class='form-control' value="<?php if (isset($_POST['message'])) {
-                                                                                                    echo $_POST['message'];
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-4 pb-3">Title</div>
+                                <div class="col-8 pb-3">
+                                    <input type="text" name="title" class='form-control' value="<?php if (isset($_POST['title'])) {
+                                                                                                    echo $_POST['title'];
                                                                                                 } else {
                                                                                                     echo "";
-                                                                                                } ?>"></textarea>
-                    </div>
-                </div>
-                <div class="border-top border-1 border-dark">
-                    <div class="py-3">Attached: Photo / Video</div>
-                    <input type="file" name="complaint_image" class='form-control' />
-                </div>
-                <div class="pt-3 text-center">
-                <button type="submit" class="btn btn-secondary col-sm-4 col-12 ">Send</button>
+                                                                                                } ?>">
+                                </div>
+                                <div class="col-4 pb-3">Message</div>
+                                <div class="col-8 pb-3">
+                                    <textarea rows="5" cols="33" name='message' class='form-control' value="<?php if (isset($_POST['message'])) {
+                                                                                                                echo $_POST['message'];
+                                                                                                            } else {
+                                                                                                                echo "";
+                                                                                                            } ?>"></textarea>
+                                </div>
+                            </div>
+                            <div class="border-top border-1 border-dark">
+                                <div class="py-3">Attached: Photo / Video</div>
+                                <input type="file" name="complaint_image" class='form-control' />
+                            </div>
+                            <div class="pt-3 text-center">
+                                <button type="submit" class="btn btn-secondary col-sm-4 col-12 ">Send</button>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </form>
         </section>

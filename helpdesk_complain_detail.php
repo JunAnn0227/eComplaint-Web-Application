@@ -100,7 +100,7 @@ include "reusable_components/user_session.php"
                 </div>
                 <div class="row my-3">
                     <div class="col-4 py-2">Photo/Video:</div>
-                    <div class="col-8 py-2 border border-3 rounded"><img src="images/no_people_img.png" alt="" width="100px"></div>
+                    <div class="col-8 py-2 border border-3 rounded"><img src="images/photo.png" alt="" width="100px"></div>
                 </div>
                 <div class="row d-flex align-items-center my-3">
                     <div class="col-4 py-2">Department</div>
@@ -168,7 +168,7 @@ include "reusable_components/user_session.php"
                 </div>
                 <div class="row d-flex align-items-center my-3">
                     <div class="col-4 py-2">Notes</div>
-                    <div class="col-8 py-2 border border-3 rounded">Ali</div>
+                    <div class="col-8 py-2 border border-3 rounded"></div>
                 </div>
                 <div class="row d-flex align-items-center my-3">
                     <div class="py-2 col-4">Action: </div>

@@ -58,45 +58,51 @@ include "reusable_components/user_session.php"
         <div class="pagetitle">
             <h1>Executive Complaint Management</h1>
         </div><!-- End Page Title -->
-        <section class="container section">
-            <div class="row">
-                <div class="col-md-7 col-9 d-flex py-4 justify-content-center align-items-center text-center px-sm-5 px-0">
-                    <label for="list_complain" class="form-label text-end m-0 pe-2">Sent:</label>
-                    <select class="form-select" id="list_complain" name="list_complain" onchange="filter(this)">
-                        <option value="all">All</option>
-                        <option value="pending">Pending</option>
-                        <option value="keep_in_view">Keep in View</option>
-                        <option value="active">Active</option>
-                        <option value="closed">Closed</option>
-                    </select>
-                </div>
+        <div class="card">
+            <div class="card-header">
+                Complaint Inbox
             </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <section class="container section">
+                        <div class="row">
+                            <div class="col-md-7 col-9 d-flex py-4 justify-content-center align-items-center text-center px-sm-5 px-0">
+                                <label for="list_complain" class="form-label text-end m-0 pe-2">Sent:</label>
+                                <select class="form-select" id="list_complain" name="list_complain" onchange="filter(this)">
+                                    <option value="all">All</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="keep_in_view">Keep in View</option>
+                                    <option value="active">Active</option>
+                                    <option value="closed">Closed</option>
+                                </select>
+                            </div>
+                        </div>
 
-            <div class="overflow-auto">
-                <table class='table table-hover table-responsive table-bordered'>
-                    <tr class="text-center">
-                        <th>ID</th>
-                        <th>Title</th></a>
-                        <th>Department</th>
-                        <th>Status</th>
-                        <th>Create Date</th>
-                        <th>Action</th>
-                    </tr>
-                    <?php
-                    if ($role == 'executive' || $role == 'admin') {
-                        include 'config/database.php';
+                        <div class="overflow-auto">
+                            <table class='table table-hover table-responsive table-bordered'>
+                                <tr class="text-center">
+                                    <th>ID</th>
+                                    <th>Title</th></a>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                    <th>Create Date</th>
+                                    <th>Action</th>
+                                </tr>
+                                <?php
+                                if ($role == 'executive' || $role == 'admin') {
+                                    include 'config/database.php';
 
-                        try {
-                            $query = "SELECT * from complaint INNER JOIN department ON complaint.departmentID=department.department_ID WHERE departmentID=:departmentID";
-                            $stmt = $con->prepare($query);
-                            $stmt->bindParam(":departmentID", $department_ID);
-                            $stmt->execute();
-                            $num = $stmt->rowCount();
+                                    try {
+                                        $query = "SELECT * from complaint INNER JOIN department ON complaint.departmentID=department.department_ID WHERE departmentID=:departmentID";
+                                        $stmt = $con->prepare($query);
+                                        $stmt->bindParam(":departmentID", $department_ID);
+                                        $stmt->execute();
+                                        $num = $stmt->rowCount();
 
-                            if ($num > 0) {
-                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    extract($row);
-                                    echo "<tr class='complain'>
+                                        if ($num > 0) {
+                                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                                extract($row);
+                                                echo "<tr class='complain'>
                                                 <td class='text-center'>$complaintID</td>
                                                 <td>$title</td>
                                                 <td>$department_name</td>
@@ -104,21 +110,22 @@ include "reusable_components/user_session.php"
                                                 <td class='text-center'>$createdate</td>
                                                 <td class='d-flex justify-content-center align-items-center'><a href='executive_complain_detail.php?complaintID=$complaintID'><i class='fa-regular fa-pen-to-square'></i><a/><span style='padding:5px'><span><a href='complain_detail.php?complaintID=$complaintID'><i class='fa-solid fa-eye '></i></a></td>
                                             </tr>";
+                                            }
+                                        }
+                                    }
+                                    // show error
+                                    catch (PDOException $exception) {
+                                        die('ERROR: ' . $exception->getMessage());
+                                    }
                                 }
-                            }
-                        }
-                        // show error
-                        catch (PDOException $exception) {
-                            die('ERROR: ' . $exception->getMessage());
-                        }
-                    }
 
-                    ?>
-                </table>
-            </div>
-
-
-        </section>
+                                ?>
+                            </table>
+                        </div>
+                    </section>
+                </li>
+            </ul>
+        </div>
     </main>
     <?php include "footer.php" ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

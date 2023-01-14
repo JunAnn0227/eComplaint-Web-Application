@@ -27,67 +27,74 @@ include "reusable_components/user_session.php"
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>User List</h1>
+            <h1>Admin Management</h1>
         </div><!-- End Page Title -->
+        <div class="card p-3">
+            <div class="card-header">
+                User List
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <section class="container section">
+                        <?php
+                        include 'config/database.php';
 
-        <section class="container section">
-        <?php
-                    include 'config/database.php';
+                        $query = "SELECT * FROM users";
+                        $stmt = $con->prepare($query);
+                        $stmt->execute();
 
-                    $query = "SELECT * FROM users";
-                    $stmt = $con->prepare($query);
-                    $stmt->execute();
+                        $num = $stmt->rowCount();
 
-                    $num = $stmt->rowCount();
+                        if ($num > 0) {
 
-                    if ($num > 0) {
+                            echo "<div class='overflow-auto'>";
+                            echo "<table class='table table-hover table-responsive table-bordered text-center align-middle'>";
 
-                        echo "<div class='overflow-auto'>";
-                        echo "<table class='table table-hover table-responsive table-bordered text-center align-middle'>";
-
-                        //creating our table heading
-                        echo "<tr>";
-                        echo "<th>User ID</th>";
-                        echo "<th>Username</th>";
-                        echo "<th>Email</th>";
-                        echo "<th>Role</th>";
-                        echo "<th>Action</th>";
-                        echo "</tr>";
-
-                        // retrieve our table contents
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            extract($row);
-
-                            echo "<td>{$userID}</td>";
-                            echo "<td>{$username}</td>";
-                            echo "<td>{$email}</td>";
-                            echo "<td>{$role}</td>";
-                            echo "<td>";
-                            // read one record
-                            echo "<a href='admin_user_detail.php?userid={$userID}' class='btn btn-info m-r-1em m-3'>View Detail</a>";
-                            
-                            echo "<a href='admin_user_edit.php?userid={$userID}' class='btn btn-primary m-r-1em m-3'>Edit</a>";
-
-                            // we will use this links on next part of this post
-                            echo "<a href='user_delete.php?userid={$userID}'  class='btn btn-danger m-3'>Delete</a>";
-                            echo "</td>";
+                            //creating our table heading
+                            echo "<tr>";
+                            echo "<th>User ID</th>";
+                            echo "<th>Username</th>";
+                            echo "<th>Email</th>";
+                            echo "<th>Role</th>";
+                            echo "<th>Action</th>";
                             echo "</tr>";
+
+                            // retrieve our table contents
+                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                extract($row);
+
+                                echo "<td>{$userID}</td>";
+                                echo "<td>{$username}</td>";
+                                echo "<td>{$email}</td>";
+                                echo "<td>{$role}</td>";
+                                echo "<td>";
+                                // read one record
+                                echo "<a href='admin_user_detail.php?userid={$userID}' class='btn btn-info m-r-1em m-3'>View Detail</a>";
+
+                                echo "<a href='admin_user_edit.php?userid={$userID}' class='btn btn-primary m-r-1em m-3'>Edit</a>";
+
+                                // we will use this links on next part of this post
+                                echo "<a href='user_delete.php?userid={$userID}'  class='btn btn-danger m-3'>Delete</a>";
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+
+
+                            // end table
+                            echo "</table>";
+                            echo "</div>";
+                        } else {
+                            echo "<div class='alert alert-danger'>No records found.</div>";
                         }
+                        ?>
+                    </section>
+                </li>
+            </ul>
+        </div>
+    </main>
 
-
-                        // end table
-                        echo "</table>";
-                        echo "</div>";
-                    } else {
-                        echo "<div class='alert alert-danger'>No records found.</div>";
-                    }
-                ?>
-        </section>
-        
-        </main>
-
-        <script src="js/main.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 
 </html>
