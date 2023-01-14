@@ -1,0 +1,34 @@
+
+/* ========================================================================================================
+Student Complain Details 
+===========================================================================================================
+*/
+
+.fa-eye:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.circle {
+    width: 10vw;
+    height: 10vw;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 70px;
+    max-height: 70px;
+}
+
+.background_color1 {
+    background-color: #a5c5fe;
+}
+
+@media screen and (max-width: 720px) {
+    .fa-arrow-right-long{
+        font-size: 40px;
+    }
+}
+@media screen and (max-width: 540px) {
+    .fa-arrow-right-long{
+        font-size: 30px;
+    }
+}
