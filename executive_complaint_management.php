@@ -154,7 +154,7 @@ include "reusable_components/user_session.php"
 
             if (fil_ter.value == 'pending') {
                 for (var i = 0; i < complain_length; i++) {
-                    if (!(document.getElementsByClassName("status")[i].innerHTML == "pending")) {
+                    if (!(document.getElementsByClassName("status")[i].innerHTML == "Pending")) {
                         document.getElementsByClassName("complain")[i].style.display = "none";
                     } else {
                         document.getElementsByClassName("complain")[i].style.display = "";
@@ -163,7 +163,7 @@ include "reusable_components/user_session.php"
             }
             if (fil_ter.value == 'keep_in_view') {
                 for (var i = 0; i < complain_length; i++) {
-                    if (!(document.getElementsByClassName("status")[i].innerHTML == "kiv")) {
+                    if (!(document.getElementsByClassName("status")[i].innerHTML == "Keep in View")) {
                         document.getElementsByClassName("complain")[i].style.display = "none";
                     } else {
                         document.getElementsByClassName("complain")[i].style.display = "";
@@ -172,7 +172,7 @@ include "reusable_components/user_session.php"
             }
             if (fil_ter.value == 'active') {
                 for (var i = 0; i < complain_length; i++) {
-                    if (!(document.getElementsByClassName("status")[i].innerHTML == "active")) {
+                    if (!(document.getElementsByClassName("status")[i].innerHTML == "Active")) {
                         document.getElementsByClassName("complain")[i].style.display = "none";
                     } else {
                         document.getElementsByClassName("complain")[i].style.display = "";
@@ -181,7 +181,7 @@ include "reusable_components/user_session.php"
             }
             if (fil_ter.value == 'closed') {
                 for (var i = 0; i < complain_length; i++) {
-                    if (!(document.getElementsByClassName("status")[i].innerHTML == "closed")) {
+                    if (!(document.getElementsByClassName("status")[i].innerHTML == "Closed")) {
                         document.getElementsByClassName("complain")[i].style.display = "none";
                     } else {
                         document.getElementsByClassName("complain")[i].style.display = "";
